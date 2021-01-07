@@ -18,7 +18,7 @@ int main ()
       arr[used] = x;
       used++;
     }
-  for (i = 0; i < 10; i++)
+  for (i = 0; i < used; i++)
     printf ("%d ", arr[i]);
   free (arr);
 }
