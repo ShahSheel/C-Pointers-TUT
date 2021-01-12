@@ -1,24 +1,39 @@
+/**
+This code is from http://www.mathcs.emory.edu/~cheung/Courses/255/Syllabus/2-C-adv-data/dyn-array.html
+and has been refactored by Sheel for tutorial purposes 
+
+**/
+
 #include <stdio.h>
+#include <stdlib.h>
 
-int main ()
+
+int main(int argc, char *argv[])
 {
-  int i, x;
-  int capacity = 5;		//initial capacity;
-  int used = 0;			// No. of elements inserted so far
-  int *arr = (int *) malloc (sizeof (int) * capacity);
+    int i;
 
-  for (i = 0; i < 10; i++)	// now suppose you want to insert 10 elements
-    {
-      scanf ("%d", &x);
-      if (used == capacity)
-	{
-	  capacity *= 2;	// double the capacity of array
-	  arr = (int *) realloc (arr, sizeof (int) * capacity);
-	}
-      arr[used] = x;
-      used++;
-    }
-  for (i = 0; i < used; i++)
-    printf ("%d ", arr[i]);
-  free (arr);
+    double* p;    // We uses this reference variable to access
+                  // dynamically created array elements
+
+    p = calloc(10, sizeof(double) );  // Make double array of 10 elements
+
+    for ( i = 0; i < 10; i++ )
+       *(p + i) = i;            // put value i in array element i. *(p + i) is an alias  for   a[i]     
+
+    for ( i = 0; i < 10; i++ )
+       printf("*(p + %d) = %lf\n", i, *(p+i) );
+
+    free(p);      // Un-reserve the first array
+
+    putchar('\n');
+
+    p = calloc(4, sizeof(double) );  // Make a NEW double array of 4 elements
+
+    for ( i = 0; i < 4; i++ )
+       *(p + i) = i*i;            // put value i*i in array element i
+
+    for ( i = 0; i < 4; i++ )
+       printf("*(p + %d) = %lf\n", i, *(p+i) );
+
+    free(p);      // Un-reserve the second array
 }
